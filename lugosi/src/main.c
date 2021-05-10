@@ -1,7 +1,7 @@
 #include "callbacks.h"
 #include "scene.h"
 #include "camera.h"
-//* #include "animate.h"
+#include "animate.h"
 #include <GL/glut.h>
 #include <stdio.h>
 
@@ -61,11 +61,9 @@ int main(int argc, char* argv[])
     init_opengl();
     init_scene(&scene);
     init_camera(&camera);
-	/*
 	init_mouth();
 	init_left_eyebrow();
 	init_right_eyebrow();
-	*/
 	
 	set_callbacks();
 	

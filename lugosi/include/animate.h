@@ -16,9 +16,18 @@ typedef struct Eyebrow{
 	int* indexes;
 }Eyebrow;
 
+typedef enum{
+	CLOUDY,
+	NERVOUS, 
+	PEEVED, 
+	SURPRISED, 
+	NORMALIZED
+}Mimic;
+
 Mouth mouth;
 Eyebrow left_eyebrow;
 Eyebrow right_eyebrow;
+Mimic mimic;
 
 void init_mouth();
 
@@ -26,16 +35,16 @@ void init_left_eyebrow();
 
 void init_right_eyebrow();
 
-TextureVertex get_texture_coords(double x, double y, double z);
+TextureVertex* get_texture_coords(double x, double y);
 
-int find_vertex(double wanted_x, double wanted_y, double wanted_z);
+int find_vertex(double wanted_x, double wanted_y);
 
 int is_tolerated(double coords, double wanted);
 
 int find_triangle(int wanted_index);
 
-void update_mimic(char *mimic);
+void update_mimic(double time);
 
-void animate(double mouth_move, double eyebrow_move);
+void animate(double mouth_move, double eyebrow_move, double time);
 
 #endif

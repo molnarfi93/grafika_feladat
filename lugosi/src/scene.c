@@ -1,10 +1,7 @@
 #include "scene.h"
 #include "load.h"
 #include "model.h"
-
-float ambient_light[4];
-float diffuse_light[4];
-float specular_light[4];
+#include <GL/glut.h>
 
 void init_scene(Scene* scene)
 {
@@ -30,9 +27,9 @@ void init_scene(Scene* scene)
 
 void set_lighting()
 {
-    ambient_light[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-    diffuse_light[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-    specular_light[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+    float ambient_light[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+    float diffuse_light[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+    float specular_light[] = { 1.0f, 1.0f, 1.0f, 1.0f };
     float position[] = { 0.0f, 0.0f, 1.0f, 1.0f };
 
     glLightfv(GL_LIGHT0, GL_AMBIENT, ambient_light);
@@ -43,6 +40,10 @@ void set_lighting()
 
 void update_lighting(float x)
 {
+	float ambient_light[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+    float diffuse_light[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+    float specular_light[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+	
 	int i;
 	for(i=0;i<4;i++){
 		ambient_light[i] += x;
@@ -53,7 +54,6 @@ void update_lighting(float x)
     glLightfv(GL_LIGHT0, GL_AMBIENT, ambient_light);
     glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse_light);
     glLightfv(GL_LIGHT0, GL_SPECULAR, specular_light);
-    glLightfv(GL_LIGHT0, GL_POSITION, position);
 }
 
 void set_material(const Material* material)

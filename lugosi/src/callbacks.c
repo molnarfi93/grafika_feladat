@@ -1,7 +1,7 @@
 #include "callbacks.h"
 #include "camera.h"
 #include "scene.h"
-//* include "animate.h"
+#include "animate.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -74,16 +74,16 @@ void motion(int x, int y)
 void keyboard(unsigned char key, int x, int y)
 {
     switch (key) {
-    case 'w':
+    case 'd':
         set_camera_speed(&camera, 1);
         break;
-    case 's':
+    case 'a':
         set_camera_speed(&camera, -1);
         break;
-    case 'a':
+    case 'w':
         set_camera_side_speed(&camera, 1);
         break;
-    case 'd':
+    case 's':
         set_camera_side_speed(&camera, -1);
         break;
     case 't':
@@ -94,21 +94,20 @@ void keyboard(unsigned char key, int x, int y)
             is_preview_visible = TRUE;
         }
         break;
-	/*
 	case 'c':
-		update_mimic("cloudy");
+		mimic = CLOUDY;
 		break;
 	case 'n':
-		update_mimic("nervous");
+		mimic = NERVOUS;
 		break;
 	case 'p':
-		update_mimic("peeved");
+		mimic = PEEVED;
 		break;
 	case 'b':
-		update_mimic("surprised");
+		mimic = SURPRISED;
 		break;
-	case 'n':
-		update_mimic("normal");
+	case 'u':
+		mimic = NORMALIZED;
 		break;
 	case '+':
 		set_lighting(0.1);
@@ -117,14 +116,14 @@ void keyboard(unsigned char key, int x, int y)
 		set_lighting(-0.1);
 		break;
 	case '17':
-		printf("Használati útmutató\n
-				'c': borús arckifejezés\n
-				'n': ideges arckifejezés\n
-				'p': sértett arckifejezés\n
-				'b': meglepett arckifejezés\n
-				'n': normál arckifejezés");
+		printf("Használati útmutató\n"
+				"\'c\': borús arckifejezés\n"
+				"\'n\': ideges arckifejezés\n"
+				"\'p\': sértett arckifejezés\n"
+				"\'b\': meglepett arckifejezés\n"
+				"\'u\': normál arckifejezés");
+				
 	}
-	*/
 
     glutPostRedisplay();
 }
@@ -133,14 +132,14 @@ void keyboard_up(unsigned char key, int x, int y)
 {
     switch (key) {
     case 'w':
-    case 's':
+    case 'a':
         set_camera_speed(&camera, 0.0);
         break;
-    case 'a':
+    case 's':
     case 'd':
         set_camera_side_speed(&camera, 0.0);
         break;
-    }
+    }	
 
     glutPostRedisplay();
 }
@@ -156,6 +155,7 @@ void idle()
     last_frame_time = current_time;
 
     update_camera(&camera, elapsed_time);
+	update_mimic(elapsed_time);
 
     glutPostRedisplay();
 }
